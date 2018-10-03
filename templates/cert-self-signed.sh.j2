@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# Title: Generate selfsigned certificate
+#
+# Author: Luc Rutten
+# File: cert-self-signed.sh.j2
+#
+# Check if certicate is valid:
+#   openssl x509 -in /etc/ssl/certs/apache-selfsigned.crt -text -noout
+#
+
+# Variable(s)
+CERT_DAYS='{{ cert_days }}'
+CERT_RSA='{{ cert_rsa }}'
+CERT_KEYOUT='{{ cert_keyout }}'
+CERT_OUT='{{ cert_out }}'
+
+CERT_COUNTRY='{{ cert_country }}'
+CERT_STATE='{{ cert_state_prov }}'
+CERT_LOCALITY='{{ cert_locality }}'
+CERT_ORGNAME='{{ cert_orgname }}'
+CERT_ORGUNIT='{{ cert_orgunit }}'
+CERT_COMNAME='{{ cert_comname }}'
+CERT_EMAIL='{{ cert_email }}'
+
+# Generate certificates
+openssl req -x509 -nodes -days $CERT_DAYS -newkey rsa:$CERT_RSA \
+-keyout $CERT_KEYOUT \
+-out $CERT_OUT \
+-subj "/C=$CERT_COUNTRY/ST=$CERT_STATE/L=$CERT_LOCALITY/O=$CERT_ORGNAME/OU=$CERT_ORGUNIT/CN=$CERT_COMNAME/emailAddress=$CERT_EMAIL"

@@ -1,0 +1,43 @@
+---
+  # Title: app-cert-client
+  #
+  # Author: Luc Rutten
+  # File: defaults/main.yml
+  #
+  # Description:
+  #   
+  #
+  
+
+  # -- Self signed certificate -- 
+  #
+  # Variable(s)
+  #   cert_state      : 'enabled' or 'disabl√√ed'                  # Whether or not a certificate wil be generat. 
+  #   cert_days       : '365'                                      # The lenght of time the certificate is valid. 
+  #   cert_rsa        : '4096'                                     # The bits lenght ofthe RSA key.
+  #   cert_keyout     : '/etc/ssl/private/apache-selfsigned.key'   # The location where the privatekey will be generated.
+  #   cert_out        : '/etc/ssl/certs/apache-selfsigned.crt'     # The location where the certificate will be generated.
+  #   cert_country    : 'NL'                                       # The name of the country in (2 Letter code).
+  #   cert_state_prov : 'Limburg'                                  # The name of the state or province.
+  #   cert_locality   : 'Belfeld'                                  # The name of the city.
+  #   cert_orgname    : 'company LTD.'                             # The name of the organisation.
+  #   cert_orgunit    : 'IT operations'                            # The name of the organizational unit.
+  #   cert_commname   : '{{ ansible_hostname }}'                   # Server FQDN or YOUR name (server ip or hostname).
+  #   cert_email      : 'support@example.org'                      # Contact E-mail address.
+  #
+  # Check if certicate is valid:
+  #   openssl x509 -in /etc/ssl/certs/apache-selfsigned.crt -text -noout
+
+  cert_state      : 'enabled'
+  cert_base_path  : '/opt/ansible/system/ssl'
+  cert_days       : '365'
+  cert_rsa        : '4096'
+  cert_keyout     : '{{ cert_base_path }}/private/{{ ansible_hostname }}/private-selfsigned.key'
+  cert_out        : '{{ cert_base_path }}/certs/{{ ansible_hostname }}/certificate-selfsigned.crt'
+  cert_country    : 'NL'
+  cert_state_prov : 'Limburg'
+  cert_locality   : 'Belfeld'
+  cert_orgname    : 'van Gorp Greenfood.nl' 
+  cert_orgunit    : 'IT operations'
+  cert_commname   : '{{ ansible_hostname }}'
+  cert_email      : 'support@greenfood.nl'

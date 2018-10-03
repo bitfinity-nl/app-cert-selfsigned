@@ -1,0 +1,61 @@
+---
+  # tasks file for app-cert-client
+  #
+  # Author: Luc Rutten
+  # File: tasks/main.yml
+
+  - name: "Create Ansible directory structure"
+    file:
+      path: "{{ item }}"
+      state: directory
+    with_items:
+      - '/opt/ansible'
+      - '/opt/ansible/system'
+      - '{{ cert_base_path }}/certs'
+      - '{{ cert_base_path }}/certs/{{ ansible_hostname }}'
+      - '{{ cert_base_path }}/scripts/
+    when:
+      - cert_state == 'enabled'
+
+  - name: "Remove {{ cert_base_path}}directory"
+    file:
+      path: "{{ cert_base_path }}"
+      state: absent
+    when:
+      - cert_state == 'disabled'
+
+  - name: "Transfer template to {{ cert_base_path}}/scripts/"
+    template:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      user: root
+      group: root
+      mode: 0755
+    with_items:
+      - { src: 'cert-self-signed.sh.j2', dest: '{{ cert_base_path }}/scripts/cert-self-signed.sh' } 
+    when:
+      - cert_state == 'enabled'
+
+  - name: "(Re)generate self signed certificat At 08:00 on day-of-month 1"
+    cron:
+      name: "(Re)generate self signed certificat At 08:00 on day-of-month 1"
+      minute: "0"
+      hour: "8"
+      day: "1"
+      job: "{{ cert_base_path }}/scripts/cert-self-signed.sh"
+      user: root
+      state: present
+    when:
+     - cert_state == 'enabled'
+
+  - name: "Deactived cronjob - (Re)generate self signed certificat At 08:00 on day-of-month 1"
+    cron:
+      name: "(Re)generate self signed certificat At 08:00 on day-of-month 1"
+      minute: "0"
+      hour: "8"
+      day: "1"
+      job: "{{ cert_base_path }}/scripts/cert-self-signed.sh"
+      user: root
+      state: absent
+    when:
+     - cert_state == 'disabled'
