@@ -1,0 +1,23 @@
+---
+  # Title: app-cert-selfsigned
+  #
+  # Author: Luc Rutten
+  # File: tasks/ubt-1804-amd64-disabled.yml
+  #
+  # Description:
+  #   Generate selfsigned certificate 
+
+  - name: "Remove {{ cert_base_path }} directory"
+    file:
+      path: "{{ cert_base_path }}"
+      state: absent
+
+  - name: "Deactived cronjob - (Re)generate self signed certificat At 08:00 on day-of-month 1"
+    cron:
+      name: "(Re)generate self signed certificat At 08:00 on day-of-month 1"
+      minute: "0"
+      hour: "8"
+      day: "1"
+      job: "{{ cert_base_path }}/scripts/cert-self-signed.sh"
+      user: root
+      state: absent

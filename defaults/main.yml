@@ -1,18 +1,16 @@
 ---
-  # Title: app-cert-client
+  # Title: app-cert-selfsigned
   #
   # Author: Luc Rutten
-  # File: defaults/main.yml
+  # File: default/main.yml
   #
   # Description:
-  #   
-  #
+  #   Generate selfsigned certificate 
   
-
   # -- Self signed certificate -- 
   #
   # Variable(s)
-  #   cert_state      : 'enabled' or 'disablÃÃed'                  # Whether or not a certificate wil be generat. 
+  #   cert_state      : 'enabled' or 'disablï¿½ï¿½ed'                  # Whether or not a certificate wil be generat. 
   #   cert_days       : '365'                                      # The lenght of time the certificate is valid. 
   #   cert_rsa        : '4096'                                     # The bits lenght ofthe RSA key.
   #   cert_keyout     : '/etc/ssl/private/apache-selfsigned.key'   # The location where the privatekey will be generated.
@@ -22,7 +20,7 @@
   #   cert_locality   : 'Belfeld'                                  # The name of the city.
   #   cert_orgname    : 'company LTD.'                             # The name of the organisation.
   #   cert_orgunit    : 'IT operations'                            # The name of the organizational unit.
-  #   cert_commname   : '{{ ansible_hostname }}'                   # Server FQDN or YOUR name (server ip or hostname).
+  #   cert_comname    : '{{ ansible_hostname }}'                   # Server FQDN or YOUR name (server ip or hostname).
   #   cert_email      : 'support@example.org'                      # Contact E-mail address.
   #
   # Check if certicate is valid:
@@ -39,5 +37,5 @@
   cert_locality   : 'Belfeld'
   cert_orgname    : 'example.com' 
   cert_orgunit    : 'IT example.com'
-  cert_commname   : '{{ ansible_hostname }}'
+  cert_comname    : '{{ ansible_hostname }}'
   cert_email      : 'support@example.com'
