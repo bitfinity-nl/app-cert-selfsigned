@@ -1,41 +1,44 @@
 ---
-  # Title: app-cert-selfsigned
-  #
-  # Author: Luc Rutten
-  # File: default/main.yml
-  #
-  # Description:
-  #   Generate selfsigned certificate 
-  
-  # -- Self signed certificate -- 
-  #
-  # Variable(s)
-  #   cert_state      : 'enabled' or 'disabl��ed'                  # Whether or not a certificate wil be generat. 
-  #   cert_days       : '365'                                      # The lenght of time the certificate is valid. 
-  #   cert_rsa        : '4096'                                     # The bits lenght ofthe RSA key.
-  #   cert_keyout     : '/etc/ssl/private/apache-selfsigned.key'   # The location where the privatekey will be generated.
-  #   cert_out        : '/etc/ssl/certs/apache-selfsigned.crt'     # The location where the certificate will be generated.
-  #   cert_country    : 'NL'                                       # The name of the country in (2 Letter code).
-  #   cert_state_prov : 'Limburg'                                  # The name of the state or province.
-  #   cert_locality   : 'Belfeld'                                  # The name of the city.
-  #   cert_orgname    : 'company LTD.'                             # The name of the organisation.
-  #   cert_orgunit    : 'IT operations'                            # The name of the organizational unit.
-  #   cert_comname    : '{{ ansible_hostname }}'                   # Server FQDN or YOUR name (server ip or hostname).
-  #   cert_email      : 'support@example.org'                      # Contact E-mail address.
-  #
-  # Check if certicate is valid:
-  #   openssl x509 -in /etc/ssl/certs/apache-selfsigned.crt -text -noout
+# Title: app-cert-selfsigned
+#
+# Author: Luc Rutten
+# File: default/main.yml
+#
+# Description:
+#   Generate selfsigned certificate 
 
-  cert_state      : 'enabled'
-  cert_base_path  : '/opt/ansible/system/ssl'
-  cert_days       : '365'
-  cert_rsa        : '4096'
-  cert_keyout     : '{{ cert_base_path }}/private/{{ ansible_hostname }}/private-selfsigned.key'
-  cert_out        : '{{ cert_base_path }}/certs/{{ ansible_hostname }}/certificate-selfsigned.crt'
-  cert_country    : 'NL'
-  cert_state_prov : 'Limburg'
-  cert_locality   : 'Belfeld'
-  cert_orgname    : 'example.com' 
-  cert_orgunit    : 'IT example.com'
-  cert_comname    : '{{ ansible_hostname }}'
-  cert_email      : 'support@example.com'
+# -- Self signed certificate -- 
+#
+# Variable(s)
+#   cert_state      : 'enabled' or 'disabl��ed'                  # Whether or not a certificate wil be generat. 
+#   cert_days       : '365'                                      # The lenght of time the certificate is valid. 
+#   cert_rsa        : '4096'                                     # The bits lenght ofthe RSA key.
+#   cert_keyout     : '/etc/ssl/private/apache-selfsigned.key'   # The location where the privatekey will be generated.
+#   cert_out        : '/etc/ssl/certs/apache-selfsigned.crt'     # The location where the certificate will be generated.
+#   cert_country    : 'NL'                                       # The name of the country in (2 Letter code).
+#   cert_state_prov : 'Limburg'                                  # The name of the state or province.
+#   cert_locality   : 'Belfeld'                                  # The name of the city.
+#   cert_orgname    : 'company LTD.'                             # The name of the organisation.
+#   cert_orgunit    : 'IT operations'                            # The name of the organizational unit.
+#   cert_comname    : '{{ ansible_hostname }}'                   # Server FQDN or YOUR name (server ip or hostname).
+#   cert_email      : 'support@example.org'                      # Contact E-mail address.
+#
+# Comment:
+#   Override variable(s) here, in your playbook or in group_vars.  
+#
+# Check if certicate is valid:
+#   openssl x509 -in /etc/ssl/certs/apache-selfsigned.crt -text -noout
+
+cert_state      : '{{ def_cert_state }}'
+cert_base_path  : '{{ def_cert_base_path }}'
+cert_days       : '{{ def_cert_days }}'
+cert_rsa        : '{{ def_cert_rsa }}'
+cert_keyout     : '{{ def_cert_keyout }}'
+cert_out        : '{{ def_cert_out }}'
+cert_country    : '{{ def_cert_country }}'
+cert_state_prov : '{{ def_cert_state_prov }}'
+cert_locality   : '{{ def_cert_locality }}'
+cert_orgname    : '{{ def_cert_orgname }}' 
+cert_orgunit    : '{{ def_cert_orgunit }}'
+cert_comname    : '{{ ansible_hostname }}'
+cert_email      : '{{ def_cert_email }}'
