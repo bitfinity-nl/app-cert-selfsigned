@@ -14,6 +14,7 @@ CERT_DAYS='{{ cert_days }}'
 CERT_RSA='{{ cert_rsa }}'
 CERT_KEYOUT='{{ cert_keyout }}'
 CERT_OUT='{{ cert_out }}'
+CERT_CHAIN='{{ cert_chain }}'
 
 CERT_COUNTRY='{{ cert_country }}'
 CERT_STATE='{{ cert_state_prov }}'
@@ -28,3 +29,6 @@ openssl req -x509 -nodes -days $CERT_DAYS -newkey rsa:$CERT_RSA \
 -keyout $CERT_KEYOUT \
 -out $CERT_OUT \
 -subj "/C=$CERT_COUNTRY/ST=$CERT_STATE/L=$CERT_LOCALITY/O=$CERT_ORGNAME/OU=$CERT_ORGUNIT/CN=$CERT_COMNAME/emailAddress=$CERT_EMAIL"
+
+# Generate chainfile
+cat $CERT_KEYOUT $CERT_OUT > $CERT_CHAIN
