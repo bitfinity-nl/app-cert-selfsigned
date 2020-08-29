@@ -66,4 +66,4 @@ Author Information
 ------------------
 
 Bitfinity-NL \
-http://www.bitfinity.nl
+https://www.bitfinity.nl
