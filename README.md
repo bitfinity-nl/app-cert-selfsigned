@@ -17,7 +17,7 @@ see defaults/main.yml for more details
 
 Example Playbook
 ----------------
- Default variable(s) for group hosts:
+ 1. Register client in your inventory file ../hosts.
 ```
 [cert_selfsigned]
 server-01
