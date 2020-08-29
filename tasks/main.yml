@@ -1,22 +1,36 @@
 ---
-  # Title: app-cert-selfsigned
-  #
-  # Author: Luc Rutten
-  # File: tasks/main.yml
-  #
-  # Description:
-  #   Generate selfsigned certificate 
+# Title: app-cert-selfsigned
+#
+# Author: Luc Rutten
+# File: tasks/main.yml
+#
+# Description:
+#   Generate selfsigned certificate 
 
-  - name: "Generate selfsigned certificated when state is enabled"
-    import_tasks: ubt-1804-amd64-enabled.yml
-    when:
-      - ansible_distribution_version == "18.04"
-      - ansible_architecture == "x86_64"
-      - cert_state == "enabled"
+- name: "Generate selfsigned certificated when state is enabled"
+  import_tasks: ubt-1804-amd64-enabled.yml
+  when:
+    - ansible_distribution_version == "18.04"
+    - ansible_architecture == "x86_64"
+    - cert_state == "enabled"
 
-  - name: "Remove selfsigned certificated when state is disabled"
-    import_tasks: ubt-1804-amd64-disabled.yml
-    when:
-      - ansible_distribution_version == "18.04"
-      - ansible_architecture == "x86_64"
-      - cert_state == "disabled"
+- name: "Generate selfsigned certificated when state is enabled"
+  import_tasks: ubt-2004-amd64-enabled.yml
+  when:
+    - ansible_distribution_version == "20.04"
+    - ansible_architecture == "x86_64"
+    - cert_state == "enabled"
+    
+- name: "Remove selfsigned certificated when state is disabled"
+  import_tasks: ubt-1804-amd64-disabled.yml
+  when:
+    - ansible_distribution_version == "18.04"
+    - ansible_architecture == "x86_64"
+    - cert_state == "disabled"
+ 
+- name: "Remove selfsigned certificated when state is disabled"
+  import_tasks: ubt-2004-amd64-disabled.yml
+  when:
+    - ansible_distribution_version == "20.04"
+    - ansible_architecture == "x86_64"
+    - cert_state == "disabled"
