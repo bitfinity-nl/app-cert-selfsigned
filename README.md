@@ -18,9 +18,11 @@ see defaults/main.yml for more details
 Example Playbook
 ----------------
  Default variable(s) for group hosts:
-    [cert_selfsigned]
-    server-01
- 
+```
+[cert_selfsigned]
+server-01
+```
+
  Default variable(s) for group group_vars/cert_selfsigned.yml:
 ```
     ---
@@ -48,7 +50,7 @@ Example Playbook
 ```
 
  Example playbook.yml:
-    - hosts: servers
+     - hosts: servers
     
       roles:
          - app-cert-selfsigned
