@@ -1,0 +1,46 @@
+---
+# Title: app-cert-selfsigned
+#
+# Author: Luc Rutten
+# File: tasks/ubt-2004-amd64-enabled.yml
+#
+# Description:
+#   Generate selfsigned certificate 
+
+- name: "Create Ansible directory structure"
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - '/opt/ansible'
+    - '/opt/ansible/system'
+    - '{{ cert_base_path }}/certs'
+    - '{{ cert_base_path }}/certs/{{ ansible_hostname }}'
+    - '{{ cert_base_path }}/private'
+    - '{{ cert_base_path }}/private/{{ ansible_hostname }}'
+    - '{{ cert_base_path }}/chain'
+    - '{{ cert_base_path }}/chain/{{ ansible_hostname }}'    
+    - '{{ cert_base_path }}/scripts'
+
+- name: "Transfer template to {{ cert_base_path }}/scripts/"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - { src: 'cert-self-signed.sh.j2', dest: '{{ cert_base_path }}/scripts/cert-self-signed.sh' }
+
+- name: "Generate selfsigned certificate"
+  raw: "{{ cert_base_path }}/scripts/cert-self-signed.sh"
+
+- name: "(Re)generate selfsigned certificat At 08:00 on day-of-month 1"
+  cron:
+    name: "(Re)generate self signed certificat At 08:00 on day-of-month 1"
+    minute: "0"
+    hour: "8"
+    day: "1"
+    job: "{{ cert_base_path }}/scripts/cert-self-signed.sh"
+    user: root
+    state: present
