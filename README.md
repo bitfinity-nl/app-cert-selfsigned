@@ -59,6 +59,5 @@ GPLv3
 Author Information
 ------------------
 
-L.Rutten
-
+L.Rutten \
 http://www.bitfinity.nl
