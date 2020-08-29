@@ -22,6 +22,7 @@ Example Playbook
     server-01
  
  Default variable(s) for group group_vars/cert_selfsigned.yml:
+```
     ---
     # Title: cert_selfsigned
     #
@@ -44,13 +45,14 @@ Example Playbook
     def_cert_orgname    : '<organizational name>'
     def_cert_orgunit    : '<department>'
     def_cert_email      : '<email@example.com>'
-
+```
 
  Example playbook.yml:
     - hosts: servers
     
       roles:
          - app-cert-selfsigned
+         
 License
 -------
 
@@ -59,5 +61,5 @@ GPLv3
 Author Information
 ------------------
 
-L.Rutten \
+Bitfinity-NL \
 http://www.bitfinity.nl
