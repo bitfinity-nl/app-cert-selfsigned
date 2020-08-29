@@ -44,9 +44,9 @@ def_cert_chain      : '{{ def_cert_base_path }}/chain/{{ ansible_hostname }}/cha
 def_cert_country    : '<Country code (2 letters)>'
 def_cert_state_prov : '<Province>'
 def_cert_locality   : '<Place>'
-def_cert_orgname    : '<organizational name>'
+def_cert_orgname    : '{{ def_organizational_name }}'
 def_cert_orgunit    : '<department>'
-def_cert_email      : '<email@example.com>'
+def_cert_email      : ''{{ def_organizational_email }}'
 ```
 
 3. Add the role to your playbook under the section "- roles".
