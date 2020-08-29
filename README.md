@@ -17,13 +17,13 @@ see defaults/main.yml for more details
 
 Example Playbook
 ----------------
- 1. Register client in your inventory file ../hosts.
+1. Register client in your inventory file ../hosts.
 ```
 [cert_selfsigned]
 server-01
 ```
 
- Default variable(s) for group group_vars/cert_selfsigned.yml:
+2. Set the default variable(s) for the group "cert_selfsigned" in "group_vars/cert_selfsigned.yml".
 ```
 ---
 # Title: cert_selfsigned
@@ -49,7 +49,7 @@ def_cert_orgunit    : '<department>'
 def_cert_email      : '<email@example.com>'
 ```
 
-Example playbook.yml:
+3. Add the role to your playbook under the section "- roles".
 ```
 - hosts: servers
   
