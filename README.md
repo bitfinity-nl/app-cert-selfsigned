@@ -15,7 +15,7 @@ Role Variables
 see defaults/main.yml for more details
 
 
-Example Playbook
+Howto
 ----------------
 1. Register client in your inventory file ../hosts.
 ```
