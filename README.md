@@ -38,9 +38,9 @@ def_cert_state      : 'enabled'
 def_cert_base_path  : '/opt/ansible/system/ssl'
 def_cert_days       : '365'
 def_cert_rsa        : '4096'
-def_cert_keyout     : '{{ def_cert_base_path }}/private/{{ ansible_hostname }}/apache-self>
-def_cert_out        : '{{ def_cert_base_path }}/certs/{{ ansible_hostname }}/apache-selfsi>
-def_cert_chain      : '{{ def_cert_base_path }}/chain/{{ ansible_hostname }}/chain.pem}}'
+def_cert_keyout     : '{{ def_cert_base_path }}/private/{{ ansible_hostname }}/apache-selfsigned.key'
+def_cert_out        : '{{ def_cert_base_path }}/certs/{{ ansible_hostname }}/apache-selfsigned.crt'
+def_cert_chain      : '{{ def_cert_base_path }}/chain/{{ ansible_hostname }}/chain.pem'
 def_cert_country    : '<Country code (2 letters)>'
 def_cert_state_prov : '<Province>'
 def_cert_locality   : '<Place>'
